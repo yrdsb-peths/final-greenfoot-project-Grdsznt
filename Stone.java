@@ -14,6 +14,17 @@ public class Stone extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        setLocation(getX(), getY()+4);
+        MyWorld world = (MyWorld) getWorld();
+        
+        if (getY() >= 835) {
+            world.getObjects(Spaceship.class).get(0).lives--;
+            if (world.getObjects(Spaceship.class).get(0).lives == 0) {
+                //world.gameOver();
+            }else {
+                world.addObstacle();
+            }
+            world.removeObject(this);
+        }
     }
 }

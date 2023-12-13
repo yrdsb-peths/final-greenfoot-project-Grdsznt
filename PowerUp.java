@@ -14,6 +14,13 @@ public class PowerUp extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        setLocation(getX(), getY()+4);
+        MyWorld world = (MyWorld) getWorld();
+        
+        if (getY() >= 835) {
+            
+            world.addObstacle();
+            world.removeObject(this);
+        }
     }
 }

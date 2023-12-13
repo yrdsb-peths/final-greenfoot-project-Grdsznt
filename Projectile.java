@@ -23,8 +23,27 @@ public class Projectile extends Actor
     public void act()
     {
         setLocation(getX(), getY()-upLvl);
+        MyWorld world = (MyWorld) getWorld();
         if (getY() < -5) {
-            getWorld().removeObject(this);
+            world.removeObject(this); return;
         }
+        if(isTouching(LittleRock.class)){
+            removeTouching(LittleRock.class);
+            // world.increaseScore();
+            world.addObstacle();
+        } else if (isTouching(Rock.class)) {
+            removeTouching(Rock.class);
+            // world.increaseScore();
+            world.addObstacle();
+        } else if (isTouching(Stone.class)) {
+            removeTouching(Stone.class);
+            // world.increaseScore();
+            world.addObstacle();
+        } else if (isTouching(PowerUp.class)) {
+            removeTouching(PowerUp.class);
+            world.addObstacle();
+            upLvl++; world.getObjects(Spaceship.class).get(0).lvl++;
+        }
+          
     }
 }

@@ -17,6 +17,7 @@ public class Spaceship extends Actor
     SimpleTimer projectileTimer = new SimpleTimer();
     boolean marked = false;
     boolean shot = false;
+    public int lives = 3;
     
     public Spaceship() {
         GreenfootImage image = getImage();  
@@ -24,11 +25,14 @@ public class Spaceship extends Actor
         setImage(image);
     }
     private int speed = 5;
+    public int lvl = 1;
     public void act()
     {
         // TODO: move diagonal
         
         MyWorld world = (MyWorld) getWorld();
+        
+        world.setLives(lives);
         if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
             if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > 700 || !marked)) {
                 timer.mark(); marked = true;
@@ -64,6 +68,29 @@ public class Spaceship extends Actor
             projectileTimer.mark(); shot = true;
             Projectile p = new Projectile();
             getWorld().addObject(p, getX(), getY()-25);
+        }
+        
+        if (getX() < 0) {
+            setLocation(0, getY());
+        } else if (getX() > 1430) {
+            setLocation(1430, getY());
+        }
+        
+        if(isTouching(LittleRock.class)){
+            removeTouching(LittleRock.class);
+            lives--;
+            // world.increaseScore();
+            world.addObstacle();
+        } else if (isTouching(Rock.class)) {
+            removeTouching(Rock.class);
+            lives--;
+            // world.increaseScore();
+            world.addObstacle();
+        } else if (isTouching(Stone.class)) {
+            removeTouching(Stone.class);
+            lives--;
+            // world.increaseScore();
+            world.addObstacle();
         }
         
     }
