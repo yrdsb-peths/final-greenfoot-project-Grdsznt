@@ -12,13 +12,54 @@ public class PowerUp extends Actor
      * Act - do whatever the PowerUp wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public boolean dir = false;
+    public int indx = 0;
+    GreenfootImage[] spin = new GreenfootImage[11];
+    SimpleTimer aniTimer = new SimpleTimer();
+    
+    public PowerUp(boolean dir) {
+        this.dir = dir;
+        
+        for (int i = 0;i<11;i++) {
+            spin[i] = new GreenfootImage("images/pup" + i + ".png"); 
+            spin[i].scale(75, 75);
+        }
+        
+        // initially set the image to the first one
+        setImage(spin[0]);
+        
+        // mark the timer
+        aniTimer.mark();
+
+    }
+    
+    public void animate() {
+        if (aniTimer.millisElapsed() < 100) return;
+        
+        aniTimer.mark();
+        
+        setImage(spin[indx]);
+        
+        indx = (indx+1) % 11;
+    }
     public void act()
     {
-        setLocation(getX(), getY()+4);
         MyWorld world = (MyWorld) getWorld();
+        animate();
         
+        if (dir) {
+            setLocation(getX()+4, getY()+4);
+        } else {
+            setLocation(getX()-4, getY()+4);
+        }
+        
+        
+        if (getX() > 1430) {
+            setLocation(0, getY());
+        } else if (getX() < 0) {
+            setLocation(1430, getY());
+        }
         if (getY() >= 835) {
-            
             world.addObstacle();
             world.removeObject(this);
         }

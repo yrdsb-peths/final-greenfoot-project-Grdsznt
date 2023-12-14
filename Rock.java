@@ -12,15 +12,31 @@ public class Rock extends Actor
      * Act - do whatever the Rock wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public boolean dir = false;
+    
+    public Rock(boolean dir) {
+        this.dir = dir;
+    }
+    
     public void act()
     {
-        setLocation(getX(), getY()+2);
+        if (dir) {
+            setLocation(getX()+1, getY()+2);
+        } else {
+            setLocation(getX()-1, getY()+2);
+        }
+        
         MyWorld world = (MyWorld) getWorld();
         
+        if (getX() > 1430) {
+            setLocation(0, getY());
+        } else if (getX() < 0) {
+            setLocation(1430, getY());
+        }
         if (getY() >= 835) {
             world.getObjects(Spaceship.class).get(0).lives--;
             if (world.getObjects(Spaceship.class).get(0).lives == 0) {
-                //world.gameOver();
+                world.gameOver();
             }else {
                 world.addObstacle();
             }

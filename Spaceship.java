@@ -18,14 +18,15 @@ public class Spaceship extends Actor
     boolean marked = false;
     boolean shot = false;
     public int lives = 3;
+    private int speed = 5;
+    public int lvl = 1;
     
     public Spaceship() {
         GreenfootImage image = getImage();  
         image.scale(75, 75);
         setImage(image);
     }
-    private int speed = 5;
-    public int lvl = 1;
+    
     public void act()
     {
         // TODO: move diagonal
@@ -33,6 +34,8 @@ public class Spaceship extends Actor
         MyWorld world = (MyWorld) getWorld();
         
         world.setLives(lives);
+        
+        
         if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
             if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > 700 || !marked)) {
                 timer.mark(); marked = true;
@@ -74,23 +77,43 @@ public class Spaceship extends Actor
             setLocation(0, getY());
         } else if (getX() > 1430) {
             setLocation(1430, getY());
+        } else if (getY() < 0) {
+            setLocation(getX(), 0);
+        } else if (getY() > 840) {
+            setLocation(getX(), 840);
         }
+        
         
         if(isTouching(LittleRock.class)){
             removeTouching(LittleRock.class);
             lives--;
+            if (lives == 0) {
+                world.gameOver();
+            }else {
+                world.addObstacle();
+            }
             // world.increaseScore();
-            world.addObstacle();
+            
         } else if (isTouching(Rock.class)) {
             removeTouching(Rock.class);
             lives--;
+            if (lives == 0) {
+                world.gameOver();
+            } else {
+                world.addObstacle();
+            }
             // world.increaseScore();
-            world.addObstacle();
+            
         } else if (isTouching(Stone.class)) {
             removeTouching(Stone.class);
             lives--;
+            if (lives == 0) {
+                world.gameOver();
+            } else {
+                world.addObstacle();
+            }
             // world.increaseScore();
-            world.addObstacle();
+            
         }
         
     }

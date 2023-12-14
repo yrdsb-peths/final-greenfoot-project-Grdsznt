@@ -33,19 +33,20 @@ public class MyWorld extends World
     }
     
     public void addObstacle() {
-        int randx = Greenfoot.getRandomNumber(1420);
-        int randObs = Greenfoot.getRandomNumber(3);
+        int randx = Greenfoot.getRandomNumber(1421);
+        int randObs = Greenfoot.getRandomNumber(4);
+        boolean randDir = (Greenfoot.getRandomNumber(2) == 0);
         if (randObs == 0) {
-            Stone s = new Stone();
+            Stone s = new Stone(randDir);
             addObject(s, randx,30);
         } else if (randObs == 1) {
-            Rock r = new Rock();
+            Rock r = new Rock(randDir);
             addObject(r, randx, 30);
         }else if (randObs == 2){
-            LittleRock lr = new LittleRock();
+            LittleRock lr = new LittleRock(randDir);
             addObject(lr, randx, 30);
         } else {
-            PowerUp p = new PowerUp();
+            PowerUp p = new PowerUp(randDir);
             addObject(p, randx, 30);
         }
         
