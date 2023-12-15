@@ -13,16 +13,17 @@ public class Projectile extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    int upLvl = 5;
+    int upLvl = 5, spread;
     
-    public Projectile (){
+    public Projectile (int spread){
         GreenfootImage image = getImage();  
         image.scale(15, 45);
         setImage(image);
+        this.spread = spread;
     }
     public void act()
     {
-        setLocation(getX(), getY()-upLvl);
+        setLocation(getX()+spread, getY()-upLvl);
         MyWorld world = (MyWorld) getWorld();
         if (getY() < -5) {
             world.removeObject(this); return;

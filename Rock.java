@@ -13,20 +13,46 @@ public class Rock extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public boolean dir = false;
+    public int indx = 0;
+    
+    GreenfootImage[] spin = new GreenfootImage[3];
+    SimpleTimer aniTimer = new SimpleTimer();
     
     public Rock(boolean dir) {
         this.dir = dir;
+        
+        for (int i = 0;i<3;i++) {
+            spin[i] = new GreenfootImage("images/rock" + i + ".png"); 
+        }
+        
+        setImage(spin[0]);
+        
+        aniTimer.mark();
     }
+    
+    public void animate() {
+        if (aniTimer.millisElapsed() < 50) return;
+        
+        aniTimer.mark();
+        
+        setImage(spin[indx]);
+        
+        indx = (indx+1) % 3;
+    }
+    
+    
     
     public void act()
     {
+        MyWorld world = (MyWorld) getWorld();
+        
+        animate();
+        
         if (dir) {
             setLocation(getX()+1, getY()+2);
         } else {
             setLocation(getX()-1, getY()+2);
         }
-        
-        MyWorld world = (MyWorld) getWorld();
         
         if (getX() > 1430) {
             setLocation(0, getY());
@@ -42,5 +68,6 @@ public class Rock extends Actor
             }
             world.removeObject(this);
         }
+    
     }
 }

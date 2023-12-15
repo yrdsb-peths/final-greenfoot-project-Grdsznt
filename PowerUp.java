@@ -45,6 +45,7 @@ public class PowerUp extends Actor
     public void act()
     {
         MyWorld world = (MyWorld) getWorld();
+        
         animate();
         
         if (dir) {
