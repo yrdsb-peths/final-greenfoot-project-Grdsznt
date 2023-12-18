@@ -31,7 +31,7 @@ public class Rock extends Actor
     }
     
     public void animate() {
-        if (aniTimer.millisElapsed() < 50) return;
+        if (aniTimer.millisElapsed() < 75) return;
         
         aniTimer.mark();
         

@@ -43,7 +43,13 @@ public class Projectile extends Actor
         } else if (isTouching(PowerUp.class)) {
             removeTouching(PowerUp.class);
             world.addObstacle();
-            upLvl++; world.getObjects(Spaceship.class).get(0).lvl++;
+            upLvl++; 
+            Spaceship s = world.getObjects(Spaceship.class).get(0);
+            s.lvl++;
+            if (s.indx < 8) {
+                world.getObjects(Spaceship.class).get(0).handleUp();
+            }
+        
         }
           
     }

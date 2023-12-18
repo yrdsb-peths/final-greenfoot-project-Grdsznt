@@ -16,43 +16,42 @@ public class Spaceship extends Actor
     SimpleTimer timer = new SimpleTimer();
     SimpleTimer projectileTimer = new SimpleTimer();
     
-    GreenfootImage ships[] = new GreenfootImage[5];
+    GreenfootImage ships[] = new GreenfootImage[9];
     
     boolean marked = false;
     boolean shot = false;
     public int lives = 3;
     private int speed = 5;
-    public int lvl = 1, indx = 0, proj = 1, dashTime = 700, shootTime = 500;
+    public int lvl = 1, indx = 1, proj = 1, dashTime = 700, shootTime = 500;
     
     public Spaceship() {
-        GreenfootImage image = getImage();  
-        image.scale(75, 75);
-        setImage(image);
         
-        for (int i = 0;i<8;i++) {
+        for (int i = 1;i<=8;i++) { // The images were 1-indexed
             ships[i] = new GreenfootImage("images/ship" + i + ".png"); 
+            ships[i].scale(75, 75);
         }
+        setImage(ships[indx]);
     }
     
     public void handleUp() {
         if (lvl % 3 == 0) {
             // change the ship
-            if (indx <= 7) {
+            if (indx < 8) {
                 indx++;
-            }
-            if (indx == 1) {
+            } // technically don't need the if, only for clarity purposes
+            if (indx == 2) {
                 speed += 2;
-            } else if (indx == 2) {
-                speed++; dashTime -= 200;
             } else if (indx == 3) {
-                shootTime -= 100;
+                speed++; dashTime -= 200;
             } else if (indx == 4) {
-                proj++; speed++;
+                shootTime -= 100;
             } else if (indx == 5) {
-                dashTime -= 100;
+                proj++; speed++;
             } else if (indx == 6) {
-                proj++; shootTime -= 50;
+                dashTime -= 100;
             } else if (indx == 7) {
+                proj++; shootTime -= 50;
+            } else if (indx == 8) {
                 proj++; speed++;
             }
             setImage(ships[indx]); 
@@ -66,7 +65,6 @@ public class Spaceship extends Actor
         MyWorld world = (MyWorld) getWorld();
         
         world.setLives(lives);
-        
         
         if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
             if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
@@ -101,7 +99,7 @@ public class Spaceship extends Actor
         
         if (Greenfoot.isKeyDown("space") && (projectileTimer.millisElapsed() > shootTime || !shot)) {
             projectileTimer.mark(); shot = true;
-            for (int i = proj;i>=0;i--) {
+            for (int i = 0;i<proj;i++) {
                 Projectile p;
                 if (i % 2 == 0) {
                     p = new Projectile(i);

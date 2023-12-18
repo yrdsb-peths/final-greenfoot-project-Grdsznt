@@ -34,15 +34,15 @@ public class MyWorld extends World
     
     public void addObstacle() {
         int randx = Greenfoot.getRandomNumber(1421);
-        int randObs = Greenfoot.getRandomNumber(4);
+        int randObs = Greenfoot.getRandomNumber(5);
         boolean randDir = (Greenfoot.getRandomNumber(2) == 0);
-        if (randObs == 0) {
+        if (randObs == 1) {
             Stone s = new Stone(randDir);
             addObject(s, randx,30);
-        } else if (randObs == 1) {
+        } else if (randObs == 2) {
             Rock r = new Rock(randDir);
             addObject(r, randx, 30);
-        }else if (randObs == 2){
+        }else if (randObs == 33){
             LittleRock lr = new LittleRock(randDir);
             addObject(lr, randx, 30);
         } else {
