@@ -13,17 +13,17 @@ public class Projectile extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    int upLvl = 5, spread;
+    int spd = 5, spread;
     
-    public Projectile (int spread){
+    public Projectile (int spread, int spd){
         GreenfootImage image = getImage();  
         image.scale(15, 45);
         setImage(image);
-        this.spread = spread;
+        this.spread = spread; this.spd = spd;
     }
     public void act()
     {
-        setLocation(getX()+spread, getY()-upLvl);
+        setLocation(getX()+spread, getY()-spd);
         MyWorld world = (MyWorld) getWorld();
         if (getY() < -5) {
             world.removeObject(this); return;
@@ -43,7 +43,6 @@ public class Projectile extends Actor
         } else if (isTouching(PowerUp.class)) {
             removeTouching(PowerUp.class);
             world.addObstacle();
-            upLvl++; 
             Spaceship s = world.getObjects(Spaceship.class).get(0);
             s.lvl++;
             if (s.indx < 8) {

@@ -20,7 +20,7 @@ public class LittleRock extends Actor
     public LittleRock(boolean dir) {
         this.dir = dir;
         for (int i = 0;i<24;i++) {
-            spin[i] = new GreenfootImage("images/rock" + i + ".png"); 
+            spin[i] = new GreenfootImage("images/lr" + i + ".png"); 
         }
         
         setImage(spin[0]);

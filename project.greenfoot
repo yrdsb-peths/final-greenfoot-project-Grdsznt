@@ -1,6 +1,6 @@
 #Greenfoot project file
 class.LittleRock.image=simpleSpace_tilesheet@2-2.png.png
-class.MyWorld.image=pexels-francesco-ungaro-998641.jpg
+class.MyWorld.image=bg1.png
 class.PowerUp.image=pup0.png
 class.Projectile.image=Proj.png
 class.Rock.image=simpleSpace_sheet@2-3.png.png

@@ -22,7 +22,7 @@ public class Spaceship extends Actor
     boolean shot = false;
     public int lives = 3;
     private int speed = 5;
-    public int lvl = 1, indx = 1, proj = 1, dashTime = 700, shootTime = 500;
+    public int lvl = 1, indx = 1, proj = 1, dashTime = 700, shootTime = 500, projSpeed = 5;
     
     public Spaceship() {
         
@@ -40,19 +40,19 @@ public class Spaceship extends Actor
                 indx++;
             } // technically don't need the if, only for clarity purposes
             if (indx == 2) {
-                speed += 2;
+                speed += 2; projSpeed += 2;
             } else if (indx == 3) {
                 speed++; dashTime -= 200;
             } else if (indx == 4) {
-                shootTime -= 100;
+                shootTime -= 100;  projSpeed++;
             } else if (indx == 5) {
                 proj++; speed++;
             } else if (indx == 6) {
-                dashTime -= 100;
+                dashTime -= 100; projSpeed++;
             } else if (indx == 7) {
                 proj++; shootTime -= 50;
             } else if (indx == 8) {
-                proj++; speed++;
+                proj++; speed++; projSpeed++;
             }
             setImage(ships[indx]); 
         }
@@ -102,9 +102,9 @@ public class Spaceship extends Actor
             for (int i = 0;i<proj;i++) {
                 Projectile p;
                 if (i % 2 == 0) {
-                    p = new Projectile(i);
+                    p = new Projectile(i, projSpeed);
                 } else {
-                    p = new Projectile(-i);
+                    p = new Projectile(-i, projSpeed);
                 }
                 getWorld().addObject(p, getX(), getY()-25);
             }
