@@ -15,16 +15,47 @@ public class Spaceship extends Actor
     
     SimpleTimer timer = new SimpleTimer();
     SimpleTimer projectileTimer = new SimpleTimer();
+    
+    GreenfootImage ships[] = new GreenfootImage[9];
+    
     boolean marked = false;
     boolean shot = false;
     public int lives = 3;
     private int speed = 5;
-    public int lvl = 1;
+    public int lvl = 1, indx = 1, proj = 1, dashTime = 700, shootTime = 500, projSpeed = 5;
     
     public Spaceship() {
-        GreenfootImage image = getImage();  
-        image.scale(75, 75);
-        setImage(image);
+        
+        for (int i = 1;i<=8;i++) { // The images were 1-indexed
+            ships[i] = new GreenfootImage("images/ship" + i + ".png"); 
+            ships[i].scale(75, 75);
+        }
+        setImage(ships[indx]);
+    }
+    
+    public void handleUp() {
+        if (lvl % 3 == 0) {
+            // change the ship
+            if (indx < 8) {
+                indx++;
+            } // technically don't need the if, only for clarity purposes
+            if (indx == 2) {
+                speed += 2; projSpeed += 2;
+            } else if (indx == 3) {
+                speed++; dashTime -= 200;
+            } else if (indx == 4) {
+                shootTime -= 100;  projSpeed++;
+            } else if (indx == 5) {
+                proj++; speed++;
+            } else if (indx == 6) {
+                dashTime -= 100; projSpeed++;
+            } else if (indx == 7) {
+                proj++; shootTime -= 50;
+            } else if (indx == 8) {
+                proj++; speed++; projSpeed++;
+            }
+            setImage(ships[indx]); 
+        }
     }
     
     public void act()
@@ -35,23 +66,22 @@ public class Spaceship extends Actor
         
         world.setLives(lives);
         
-        
         if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
-            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > 700 || !marked)) {
+            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
                 timer.mark(); marked = true;
                 setLocation(getX(), getY() + 50*speed);
             } else {
                 setLocation(getX(), getY() + speed);
             }
         } else if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) {
-            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > 700 || !marked)) {
+            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
                 timer.mark(); marked = true;
                 setLocation(getX() + 50*speed, getY());
             } else {
                 setLocation(getX() + speed, getY());
             }
         } else if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) {
-            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > 700 || !marked)) {
+            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
                 timer.mark(); marked = true;
                 setLocation(getX() - 50*speed, getY());
             } else {
@@ -59,7 +89,7 @@ public class Spaceship extends Actor
             }
             
         } else if (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) {
-            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > 700 || !marked)) {
+            if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
                 timer.mark(); marked = true;
                 setLocation(getX(), getY() - 50*speed);
             } else {
@@ -67,10 +97,18 @@ public class Spaceship extends Actor
             }
         }
         
-        if (Greenfoot.isKeyDown("space") && (projectileTimer.millisElapsed() > 500 || !shot)) {
+        if (Greenfoot.isKeyDown("space") && (projectileTimer.millisElapsed() > shootTime || !shot)) {
             projectileTimer.mark(); shot = true;
-            Projectile p = new Projectile();
-            getWorld().addObject(p, getX(), getY()-25);
+            for (int i = 0;i<proj;i++) {
+                Projectile p;
+                if (i % 2 == 0) {
+                    p = new Projectile(i, projSpeed);
+                } else {
+                    p = new Projectile(-i, projSpeed);
+                }
+                getWorld().addObject(p, getX(), getY()-25);
+            }
+            
         }
         
         if (getX() < 0) {

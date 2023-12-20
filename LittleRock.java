@@ -13,21 +13,44 @@ public class LittleRock extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public boolean dir = false;
-    
+    public GreenfootImage[] spin = new GreenfootImage[24];
+    SimpleTimer aniTimer = new SimpleTimer();
+    public int indx = 0;
+
     public LittleRock(boolean dir) {
         this.dir = dir;
+        for (int i = 0;i<24;i++) {
+            spin[i] = new GreenfootImage("images/lr" + i + ".png"); 
+        }
+        
+        setImage(spin[0]);
+        
+        aniTimer.mark();
     }
+    
+    public void animate() {
+        if (aniTimer.millisElapsed() < 75) return;
+        
+        aniTimer.mark();
+        
+        setImage(spin[indx]);
+        
+        indx = (indx+1) % 24;
+    }
+    
     
     public void act()
     {
+        MyWorld world = (MyWorld) getWorld();
+        animate();
+        
         if (dir) {
             setLocation(getX()+2, getY()+4);
         } else {
             setLocation(getX()-2, getY()+4);
         }
         
-        MyWorld world = (MyWorld) getWorld();
-        
+                
         if (getX() > 1430) {
             setLocation(0, getY());
         } else if (getX() < 0) {
