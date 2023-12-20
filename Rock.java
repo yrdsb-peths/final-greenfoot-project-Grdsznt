@@ -63,8 +63,10 @@ public class Rock extends Actor
             world.getObjects(Spaceship.class).get(0).lives--;
             if (world.getObjects(Spaceship.class).get(0).lives == 0) {
                 world.gameOver();
-            }else {
-                world.addObstacle();
+            }
+            world.numProj--;
+            if (world.numProj == 0) {
+                int rand = Greenfoot.getRandomNumber(world.difficulty);
             }
             world.removeObject(this);
         }

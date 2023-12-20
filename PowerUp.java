@@ -61,7 +61,10 @@ public class PowerUp extends Actor
             setLocation(1430, getY());
         }
         if (getY() >= 835) {
-            world.addObstacle();
+            world.numProj--;
+            if (world.numProj == 0) {
+                int rand = Greenfoot.getRandomNumber(world.difficulty);
+            }
             world.removeObject(this);
         }
     }

@@ -18,7 +18,8 @@ public class MyWorld extends World
     // Implement score and add word "lives" to make it easier
     // Make smooth ani
     
-    int boost, score;
+    int boost = 1, score = 0;
+    public int numProj = 1, difficulty = 3;
     Label lives, scoreCard;
     Color black = new Color(0, 0, 0), white = new Color(255, 255, 255);
     public MyWorld()
@@ -32,7 +33,7 @@ public class MyWorld extends World
         
         scoreCard = new Label(0, 65);
         scoreCard.setLineColor(white);
-        addObject(scoreCard, 1120, 87);
+        addObject(scoreCard, 1260, 87);
            
         Spaceship player = new Spaceship();
         addObject(player, 710, 540);
@@ -68,6 +69,7 @@ public class MyWorld extends World
     
     public void gameOver() {
         Label over = new Label("GAME OVER", 100);
+        over.setLineColor(white);
         addObject(over, 710, 415);
     }
     
@@ -81,5 +83,6 @@ public class MyWorld extends World
         } else if (identifier == 3) {
             boost++;
         }
+        scoreCard.setValue(score);
     }
 }
