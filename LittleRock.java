@@ -49,7 +49,6 @@ public class LittleRock extends Actor
         } else {
             setLocation(getX()-2, getY()+4);
         }
-        
                 
         if (getX() > 1430) {
             setLocation(0, getY());
@@ -64,6 +63,9 @@ public class LittleRock extends Actor
             world.numProj--;
             if (world.numProj == 0) {
                 int rand = Greenfoot.getRandomNumber(world.difficulty);
+                for (int i = 0;i<rand;i++) {
+                    world.addObstacle();
+                }
             }
             world.removeObject(this);
         }

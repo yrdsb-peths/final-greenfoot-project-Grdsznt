@@ -66,7 +66,7 @@ public class Rock extends Actor
             }
             world.numProj--;
             if (world.numProj == 0) {
-                int rand = Greenfoot.getRandomNumber(world.difficulty);
+                int rand = Greenfoot.getRandomNumber(world.difficulty); 
             }
             world.removeObject(this);
         }
