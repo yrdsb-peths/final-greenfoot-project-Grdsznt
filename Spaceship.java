@@ -35,6 +35,7 @@ public class Spaceship extends Actor
     
     public void handleUp() {
         if (lvl % 3 == 0) {
+            MyWorld world = (MyWorld) getWorld();
             // change the ship
             if (indx < 8) {
                 indx++;
@@ -46,13 +47,13 @@ public class Spaceship extends Actor
             } else if (indx == 4) {
                 shootTime -= 100;  projSpeed++;
             } else if (indx == 5) {
-                proj++; speed++;
+                proj++; speed++; world.difficulty += 3;
             } else if (indx == 6) {
                 dashTime -= 100; projSpeed++;
             } else if (indx == 7) {
-                proj++; shootTime -= 50;
+                proj++; shootTime -= 50; world.difficulty += 2;
             } else if (indx == 8) {
-                proj++; speed++; projSpeed++;
+                proj++; speed++; projSpeed++; world.difficulty++;
             }
             setImage(ships[indx]); 
         }
