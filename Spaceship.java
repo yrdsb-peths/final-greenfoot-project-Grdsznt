@@ -129,7 +129,14 @@ public class Spaceship extends Actor
             if (lives == 0) {
                 world.gameOver();
             }else {
-                world.addObstacle();
+                world.numObs--;
+                if (world.numObs == 0) {
+                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    for (int i = 0;i<rand;i++) {
+                        world.addObstacle();
+                    }
+                    world.numObs = rand;
+                }
             }
             // world.increaseScore();
             
@@ -139,7 +146,14 @@ public class Spaceship extends Actor
             if (lives == 0) {
                 world.gameOver();
             } else {
-                world.addObstacle();
+                world.numObs--;
+                if (world.numObs == 0) {
+                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    for (int i = 0;i<rand;i++) {
+                        world.addObstacle();
+                    }
+                    world.numObs = rand;
+                }
             }
             // world.increaseScore();
             
@@ -149,7 +163,14 @@ public class Spaceship extends Actor
             if (lives == 0) {
                 world.gameOver();
             } else {
-                world.addObstacle();
+                world.numObs--;
+                if (world.numObs == 0) {
+                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    for (int i = 0;i<rand;i++) {
+                        world.addObstacle();
+                    }
+                    world.numObs = rand;
+                }
             }
             // world.increaseScore();
             
