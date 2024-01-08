@@ -74,12 +74,13 @@ public class MyWorld extends World
         Label over = new Label("GAME OVER", 100);
         over.setLineColor(white);
         addObject(over, 710, 415);
+        Greenfoot.delay(120);
+        TitleScreen start = new TitleScreen();
+        start.addScore(score);
+        Greenfoot.setWorld(start);
     }
     
-    public void increaseScore(int identifier) {
-        if (getObjects(Spaceship.class).get(0).lives == 0) {
-            
-        }
+    public void increaseScore(int identifier) { 
         if (identifier == 0) {
             score += 25 * boost;
         } else if (identifier == 1) {

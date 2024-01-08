@@ -61,11 +61,7 @@ public class Spaceship extends Actor
     
     public void act()
     {
-        // TODO: move diagonal
         
-        MyWorld world = (MyWorld) getWorld();
-        
-        world.setLives(lives);
         
         if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
             if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
@@ -124,14 +120,16 @@ public class Spaceship extends Actor
         
         
         if(isTouching(LittleRock.class)){
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(LittleRock.class);
             lives--;
+            world.setLives(lives);
             if (lives == 0) {
                 world.gameOver();
             }else {
                 world.numObs--;
                 if (world.numObs == 0) {
-                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    int rand = Greenfoot.getRandomNumber(world.difficulty)+1;
                     for (int i = 0;i<rand;i++) {
                         world.addObstacle();
                     }
@@ -141,14 +139,16 @@ public class Spaceship extends Actor
             // world.increaseScore();
             
         } else if (isTouching(Rock.class)) {
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(Rock.class);
             lives--;
+            world.setLives(lives);
             if (lives == 0) {
                 world.gameOver();
             } else {
                 world.numObs--;
                 if (world.numObs == 0) {
-                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    int rand = Greenfoot.getRandomNumber(world.difficulty)+1;
                     for (int i = 0;i<rand;i++) {
                         world.addObstacle();
                     }
@@ -158,14 +158,16 @@ public class Spaceship extends Actor
             // world.increaseScore();
             
         } else if (isTouching(Stone.class)) {
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(Stone.class);
             lives--;
+            world.setLives(lives);
             if (lives == 0) {
                 world.gameOver();
             } else {
                 world.numObs--;
                 if (world.numObs == 0) {
-                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    int rand = Greenfoot.getRandomNumber(world.difficulty)+1;
                     for (int i = 0;i<rand;i++) {
                         world.addObstacle();
                     }

@@ -24,12 +24,14 @@ public class Projectile extends Actor
     public void act()
     {
         setLocation(getX()+spread, getY()-spd);
-        MyWorld world = (MyWorld) getWorld();
+        
         if (getY() < -5) {
+            MyWorld world = (MyWorld) getWorld();
             world.removeObject(this); return;
         }
         
         if(isTouching(LittleRock.class)){
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(LittleRock.class);
             world.increaseScore(1);
             world.numObs--;
@@ -43,6 +45,7 @@ public class Projectile extends Actor
             }
 
         } else if (isTouching(Rock.class)) {
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(Rock.class);
             world.increaseScore(2);
             world.numObs--;
@@ -56,6 +59,7 @@ public class Projectile extends Actor
             }
 
         } else if (isTouching(Stone.class)) {
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(Stone.class);
             world.increaseScore(0);
             world.numObs--;
@@ -69,6 +73,7 @@ public class Projectile extends Actor
             }
 
         } else if (isTouching(PowerUp.class)) {
+            MyWorld world = (MyWorld) getWorld();
             removeTouching(PowerUp.class);
             world.numObs--;
             world.increaseScore(3);
