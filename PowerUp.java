@@ -14,13 +14,13 @@ public class PowerUp extends Actor
      */
     public boolean dir = false;
     public int indx = 0;
-    GreenfootImage[] spin = new GreenfootImage[11];
+    GreenfootImage[] spin = new GreenfootImage[23];
     SimpleTimer aniTimer = new SimpleTimer();
     
     public PowerUp(boolean dir) {
         this.dir = dir;
         
-        for (int i = 0;i<11;i++) {
+        for (int i = 0;i<23;i++) {
             spin[i] = new GreenfootImage("images/pup" + i + ".png"); 
             spin[i].scale(75, 75);
         }
@@ -40,7 +40,7 @@ public class PowerUp extends Actor
         
         setImage(spin[indx]);
         
-        indx = (indx+1) % 11;
+        indx = (indx+1) % 23;
     }
     public void act()
     {
@@ -61,10 +61,17 @@ public class PowerUp extends Actor
             setLocation(1430, getY());
         }
         if (getY() >= 835) {
-            world.numProj--;
-            if (world.numProj == 0) {
-                int rand = Greenfoot.getRandomNumber(world.difficulty);
-            }
+            if (world.getObjects(Spaceship.class).get(0).lives != 0) {
+                world.numObs--;
+                if (world.numObs == 0) {
+                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    rand++;
+                    for (int i = 0;i<rand;i++) {
+                        world.addObstacle();
+                    }
+                    world.numObs = rand;
+                }
+            }            
             world.removeObject(this);
         }
     }

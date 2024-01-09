@@ -19,10 +19,11 @@ public class MyWorld extends World
     // prestige system
     // pup ani
     // title screen
-    // 
+    // sound effects
     int boost = 1, score = 0;
+    TitleScreen start = new TitleScreen();
     
-    public int numProj = 1, difficulty = 3;
+    public int numObs = 1, difficulty = 3;
     Label lives, scoreCard;
     Color black = new Color(0, 0, 0), white = new Color(255, 255, 255);
     public MyWorld()
@@ -48,15 +49,15 @@ public class MyWorld extends World
     
     public void addObstacle() {
         int randx = Greenfoot.getRandomNumber(1421);
-        int randObs = Greenfoot.getRandomNumber(5);
+        int randObs = Greenfoot.getRandomNumber(4);
         boolean randDir = (Greenfoot.getRandomNumber(2) == 0);
-        if (randObs == 1) {
+        if (randObs == 0) {
             Stone s = new Stone(randDir);
             addObject(s, randx,30);
-        } else if (randObs == 2) {
+        } else if (randObs == 1) {
             Rock r = new Rock(randDir);
             addObject(r, randx, 30);
-        }else if (randObs == 3){
+        }else if (randObs == 2){
             LittleRock lr = new LittleRock(randDir);
             addObject(lr, randx, 30);
         } else {
@@ -74,12 +75,12 @@ public class MyWorld extends World
         Label over = new Label("GAME OVER", 100);
         over.setLineColor(white);
         addObject(over, 710, 415);
+        Greenfoot.delay(120);
+        start.addScore(score);
+        Greenfoot.setWorld(start);
     }
     
-    public void increaseScore(int identifier) {
-        if (getObjects(Spaceship.class).get(0).lives == 0) {
-            
-        }
+    public void increaseScore(int identifier) { 
         if (identifier == 0) {
             score += 25 * boost;
         } else if (identifier == 1) {

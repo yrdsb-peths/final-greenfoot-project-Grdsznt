@@ -49,7 +49,6 @@ public class LittleRock extends Actor
         } else {
             setLocation(getX()-2, getY()+4);
         }
-        
                 
         if (getX() > 1430) {
             setLocation(0, getY());
@@ -57,13 +56,22 @@ public class LittleRock extends Actor
             setLocation(1430, getY());
         }
         if (getY() >= 835) {
-            world.getObjects(Spaceship.class).get(0).lives--;
-            if (world.getObjects(Spaceship.class).get(0).lives == 0) {
+            Spaceship s = world.getObjects(Spaceship.class).get(0);
+            s.lives--;
+            world.setLives(s.lives);
+            if (s.lives == 0) {
                 world.gameOver();
-            }
-            world.numProj--;
-            if (world.numProj == 0) {
-                int rand = Greenfoot.getRandomNumber(world.difficulty);
+                
+            } else {
+                world.numObs--;
+                if (world.numObs == 0) {
+                    int rand = Greenfoot.getRandomNumber(world.difficulty);
+                    rand++;
+                    for (int i = 0;i<rand;i++) {
+                        world.addObstacle();
+                    }
+                    world.numObs = rand;
+                }
             }
             world.removeObject(this);
         }
