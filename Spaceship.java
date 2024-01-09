@@ -136,7 +136,6 @@ public class Spaceship extends Actor
                     world.numObs = rand;
                 }
             }
-            // world.increaseScore();
             
         } else if (isTouching(Rock.class)) {
             MyWorld world = (MyWorld) getWorld();
@@ -155,7 +154,6 @@ public class Spaceship extends Actor
                     world.numObs = rand;
                 }
             }
-            // world.increaseScore();
             
         } else if (isTouching(Stone.class)) {
             MyWorld world = (MyWorld) getWorld();
@@ -174,7 +172,6 @@ public class Spaceship extends Actor
                     world.numObs = rand;
                 }
             }
-            // world.increaseScore();
             
         }
         

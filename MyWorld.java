@@ -19,8 +19,9 @@ public class MyWorld extends World
     // prestige system
     // pup ani
     // title screen
-    // 
+    // sound effects
     int boost = 1, score = 0;
+    TitleScreen start = new TitleScreen();
     
     public int numObs = 1, difficulty = 3;
     Label lives, scoreCard;
@@ -75,7 +76,6 @@ public class MyWorld extends World
         over.setLineColor(white);
         addObject(over, 710, 415);
         Greenfoot.delay(120);
-        TitleScreen start = new TitleScreen();
         start.addScore(score);
         Greenfoot.setWorld(start);
     }
