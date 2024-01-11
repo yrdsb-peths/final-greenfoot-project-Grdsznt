@@ -11,8 +11,9 @@ import java.util.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class TitleScreen extends World
 {
 
-    final int MM = (int) 1e5 + 3;
-    Tree BST = new Tree();      
+    
+    private Tree BST = new Tree();      
+    boolean upd = false;
     
     public TitleScreen()
     {    
@@ -30,31 +31,32 @@ public class TitleScreen extends World
         BST.add(BST.root, score);
     }
     
-    
     public void act() {
+        
         if(Greenfoot.isKeyDown("1")) {
-            MyWorld game = new MyWorld();
+            MyWorld game = new MyWorld(this); // Pass this instance of TitleScreen to MyWorld
             Greenfoot.setWorld(game);
+        }
+        if (Greenfoot.isKeyDown("3")) {
+            inOrder(BST.root, 5, 0);
         }
     }
     
     public void inOrder(Node root, int times, int spacing) {
         if (root == null || times >= 5) return;
-        
-        inOrder(root.left, times++, spacing += 50);
+        inOrder(root.left, times, spacing + 50);
         for (int i = 0;i<root.freq;i++) {
             Label lbl = new Label(0, 65);
             lbl.setValue(root.val);
             addObject(lbl, 300, spacing);
-            spacing += 50;
+            spacing += 50; times++;
         }
-        inOrder(root.right, times++, spacing += 50);
+        inOrder(root.right, times, spacing + 50);
     }
 }
 
 class Node {
     int val, freq; Node left, right;
-    
     public Node (int val) {
         this.val = val; this.freq = 1;
         right = null; left = null;

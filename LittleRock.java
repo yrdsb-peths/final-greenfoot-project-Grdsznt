@@ -61,7 +61,6 @@ public class LittleRock extends Actor
             world.setLives(s.lives);
             if (s.lives == 0) {
                 world.gameOver();
-                
             } else {
                 world.numObs--;
                 if (world.numObs == 0) {
