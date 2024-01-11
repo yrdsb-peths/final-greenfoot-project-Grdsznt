@@ -10,29 +10,44 @@ import java.util.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class TitleScreen extends World
 {
-
+    private Tree BST = new Tree();
     
-    private Tree BST = new Tree();      
+    int lastScore = 0;
+    ArrayList<Integer> highScores;
     boolean upd = false;
-    
+    Label scoreLabel;
+
     public TitleScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1420, 830, 1);
-        
+
         Spaceship player = new Spaceship();
         addObject(player, 420, 725);
+
+        scoreLabel = new Label(0, 32);
+        highScores = new ArrayList<Integer>();
         
-        inOrder(BST.root, 5, 0);
+        addObject(scoreLabel, getWidth()/2, getHeight()/2);
+        // inOrder(BST.root, 5, 0);
         
+
     }
-    
+
     public void addScore(int score) {
-        BST.add(BST.root, score);
-    }
-    
-    public void act() {
+        lastScore = score;
+        scoreLabel.setValue(score);
         
+        highScores.add(score);
+        for(int existingScore: highScores){
+            System.out.println(existingScore);    
+        }
+        
+        // BST.add(BST.root, score);
+    }
+
+    public void act() {
+
         if(Greenfoot.isKeyDown("1")) {
             MyWorld game = new MyWorld(this); // Pass this instance of TitleScreen to MyWorld
             Greenfoot.setWorld(game);
@@ -41,7 +56,7 @@ public class TitleScreen extends World
             inOrder(BST.root, 5, 0);
         }
     }
-    
+
     public void inOrder(Node root, int times, int spacing) {
         if (root == null || times >= 5) return;
         inOrder(root.left, times, spacing + 50);
@@ -61,7 +76,7 @@ class Node {
         this.val = val; this.freq = 1;
         right = null; left = null;
     }
-    
+
 }
 
 class Tree {
@@ -69,7 +84,7 @@ class Tree {
     public Tree() {
         root = null;
     }
-    
+
     public Node add(Node cur, int val) {
         if (cur == null) return new Node(val);
         if (val < cur.val) {
@@ -81,5 +96,5 @@ class Tree {
         }
         return cur;
     }
-    
+
 }
