@@ -10,14 +10,13 @@ import java.util.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class TitleScreen extends World
 {
-    private Tree BST = new Tree();
+    static Tree BST = new Tree();
     
-    int lastScore = 0;
-    ArrayList<Integer> highScores;
+    int times = 0;
     boolean upd = false;
-    Label scoreLabel;
+    Label[] lbls = new Label[5];
 
-    public TitleScreen()
+    public TitleScreen(int score)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1420, 830, 1);
@@ -25,48 +24,48 @@ public class TitleScreen extends World
         Spaceship player = new Spaceship();
         addObject(player, 420, 725);
 
-        scoreLabel = new Label(0, 32);
-        highScores = new ArrayList<Integer>();
-        
-        addObject(scoreLabel, getWidth()/2, getHeight()/2);
-        // inOrder(BST.root, 5, 0);
-        
-
-    }
-
-    public void addScore(int score) {
-        lastScore = score;
-        scoreLabel.setValue(score);
-        
-        highScores.add(score);
-        for(int existingScore: highScores){
-            System.out.println(existingScore);    
+        for (int i = 0;i<5;i++) {
+            lbls[i] = new Label(0, 50);
         }
         
-        // BST.add(BST.root, score);
+        BST.add(score);
+        getLargest(BST.root); int spacing = 275;
+        for (int i = 0;i<5;i++) {
+            addObject(lbls[i], 420, spacing);
+            spacing += 75;
+        }
+    
     }
+    
+    public TitleScreen() {
+        super(1420, 830, 1);
+
+        Spaceship player = new Spaceship();
+        addObject(player, 420, 725);
+        int spacing = 275;
+        for (int i = 0;i<5;i++) {
+            lbls[i] = new Label(0, 50);
+            addObject(lbls[i], 420, spacing);
+            spacing += 75;
+        }
+    }
+
 
     public void act() {
-
         if(Greenfoot.isKeyDown("1")) {
-            MyWorld game = new MyWorld(this); // Pass this instance of TitleScreen to MyWorld
+            MyWorld game = new MyWorld(); 
             Greenfoot.setWorld(game);
-        }
-        if (Greenfoot.isKeyDown("3")) {
-            inOrder(BST.root, 5, 0);
         }
     }
 
-    public void inOrder(Node root, int times, int spacing) {
+    public void getLargest(Node root) {
         if (root == null || times >= 5) return;
-        inOrder(root.left, times, spacing + 50);
+        getLargest(root.right);
         for (int i = 0;i<root.freq;i++) {
-            Label lbl = new Label(0, 65);
-            lbl.setValue(root.val);
-            addObject(lbl, 300, spacing);
-            spacing += 50; times++;
+            lbls[times].setValue(root.val);
+            times++;
         }
-        inOrder(root.right, times, spacing + 50);
+        getLargest(root.left);
     }
 }
 
@@ -85,8 +84,18 @@ class Tree {
         root = null;
     }
 
+    
+    public void add(int val) {
+        if (root == null) {
+            root = new Node(val);
+        } else {
+            add(root, val);
+        }
+    }
     public Node add(Node cur, int val) {
-        if (cur == null) return new Node(val);
+        if (cur == null) {
+            return new Node(val);
+        }
         if (val < cur.val) {
             cur.left = add(cur.left, val);
         } else if (val > cur.val) {
@@ -96,5 +105,7 @@ class Tree {
         }
         return cur;
     }
+    
+       
 
 }

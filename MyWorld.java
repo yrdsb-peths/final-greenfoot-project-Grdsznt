@@ -22,18 +22,15 @@ public class MyWorld extends World
     // sound effects
     int boost = 1;
     int score = 0;
-    TitleScreen titleScreen;
 
     public int numObs = 1, difficulty = 3;
     Label lives, scoreCard;
     Color black = new Color(0, 0, 0), white = new Color(255, 255, 255);
 
-    public MyWorld(TitleScreen ts)
+    public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1420, 830, 1, false);
-
-        titleScreen = ts;
 
         lives = new Label(0, 60);
         lives.setFillColor(black);
@@ -80,7 +77,7 @@ public class MyWorld extends World
         over.setLineColor(white);
         addObject(over, 710, 415);
         Greenfoot.delay(120);
-        titleScreen.addScore(score);
+        TitleScreen titleScreen = new TitleScreen(score);
         Greenfoot.setWorld(titleScreen);
     }
 
