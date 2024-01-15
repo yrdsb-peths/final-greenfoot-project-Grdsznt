@@ -15,7 +15,7 @@ public class Spaceship extends Actor
     
     SimpleTimer timer = new SimpleTimer();
     SimpleTimer projectileTimer = new SimpleTimer();
-    
+    GreenfootSound projectileSound = new GreenfootSound("blaster.mp3");
     GreenfootImage ships[] = new GreenfootImage[9];
     
     boolean marked = false;
@@ -60,9 +60,7 @@ public class Spaceship extends Actor
     }
     
     public void act()
-    {
-        
-        
+    {   
         if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
             if (Greenfoot.isKeyDown("shift") && (timer.millisElapsed() > dashTime || !marked)) {
                 timer.mark(); marked = true;
@@ -96,6 +94,7 @@ public class Spaceship extends Actor
         
         if (Greenfoot.isKeyDown("space") && (projectileTimer.millisElapsed() > shootTime || !shot)) {
             projectileTimer.mark(); shot = true;
+            projectileSound.play();
             for (int i = 0;i<proj;i++) {
                 Projectile p;
                 if (i % 2 == 0) {

@@ -12,7 +12,7 @@ public class Projectile extends Actor
      * Act - do whatever the Projectile wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+
     int spd = 5, spread;
     
     public Projectile (int spread, int spd){
@@ -90,8 +90,6 @@ public class Projectile extends Actor
             if (s.indx < 8) {
                 world.getObjects(Spaceship.class).get(0).handleUp();
             }
-        }
-        
-          
+        }  
     }
 }
