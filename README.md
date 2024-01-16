@@ -10,7 +10,6 @@ Try to get the highest score !
 
 But remember, you only have **3** lives
 
-Important Note: GreenFoot Sound only allows one sound to play at a time, so I had to chop off the majority of the audio file to fit it
-The Binary Search Tree for high score implementation is not memory or speed efficient for only displaying 5 scores, but it was interesting to implement.
-If you wanted to keep all the scores while ranking the highest ones, a binary search tree is efficient -> (o(log(n)) query and o(log(n)) update (But depends how balanced the tree is)
-Implementing an arraylist and sorting everytime would have O(n) update and and O(n(log(n)) query.
+### Important Note: 
+* GreenFoot Sound only allows one sound to play at a time, so I had to chop off the majority of the audio file to fit it.
+* The Binary Search Tree for high score implementation is not memory or speed efficient for only displaying 5 scores, but it was interesting to implement. If you wanted to keep all the scores while ranking the highest ones, a binary search tree is efficient -> (o(log(n)) query and o(log(n)) update (But depends how balanced the tree is). Implementing an arraylist and sorting everytime would have O(n) update and and O(n(log(n)) query.
