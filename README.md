@@ -1,5 +1,5 @@
 # Simple Shooter
-Play a fun yet simple space shooter ! 😼
+Play a fun yet simple space shooter ! 👾
 
 Use W A S D or arrow keys to move
 Use **Shift** to Dash
