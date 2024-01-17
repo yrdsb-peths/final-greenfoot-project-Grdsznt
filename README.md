@@ -2,13 +2,13 @@
 Play a fun yet simple space shooter ! 👾
 
 Use W A S D or arrow keys to move
-Use **Shift** to Dash
+Use ***Shift*** to Dash
 
 Shoot Power Ups to Upgrade your ship and projectile speed !
 
 Try to get the highest score !
 
-But remember, you only have **3** lives
+But remember, you only have ***3*** lives
 
 ### Important Note: 
 * GreenFoot Sound only allows one sound to play at a time, so I had to chop off the majority of the audio file to fit it.
