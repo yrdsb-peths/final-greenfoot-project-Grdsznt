@@ -79,7 +79,7 @@ public class LittleRock extends Actor
         
         // If the rock is at the bottom border
         if (getY() >= 835) {
-            // Get the curret spaceship, Decrement the lives and set the lives label in the world
+            // Get the current spaceship, Decrement the lives and set the lives label in the world
             Spaceship s = world.getObjects(Spaceship.class).get(0);
             s.lives--;
             world.setLives(s.lives);
