@@ -7,15 +7,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-
-    
-    // TODO: 
-    // Comment stuff
-    // Make smooth ani
-    // prestige system
-    // pup ani
-    // title screen
-    // sound effects\
     
     // int to track score and the boost constant of score
     int boost = 1;
